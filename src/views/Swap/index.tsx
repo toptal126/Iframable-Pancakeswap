@@ -405,7 +405,7 @@ export default function Swap() {
               <AppBody>
                 <CurrencyInputHeader
                   title={t('Swap')}
-                  subtitle={t('Trade tokens in an instant')}
+                  subtitle={t('Trade tokens in an instant1')}
                   setIsChartDisplayed={setIsChartDisplayed}
                   isChartDisplayed={isChartDisplayed}
                   hasAmount={hasAmount}
