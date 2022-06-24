@@ -1,6 +1,12 @@
 import { createGlobalStyle } from "styled-components";
 
+const InterUrl = "https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap";
 const ResetCSS = createGlobalStyle`
+  @font-face {
+    font-family: 'Inter';
+    src: url(${InterUrl}) format('truetype');
+    font-display: auto;
+  }
   /* prettier-ignore */
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -64,7 +70,7 @@ const ResetCSS = createGlobalStyle`
     box-sizing: border-box;
   }
   * {
-    font-family: 'Kanit', sans-serif;
+    font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -79,18 +85,6 @@ const ResetCSS = createGlobalStyle`
     -moz-appearance: textfield;
   }
 
-  /* Scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.colors.textSubtle}; 
-    border-radius: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px ${({ theme }) => theme.colors.input}; 
-    border-radius: 10px;
-  }
 
   /* Slider */ 
   input[type=range] {
