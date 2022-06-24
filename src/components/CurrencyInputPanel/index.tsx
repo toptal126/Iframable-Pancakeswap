@@ -15,8 +15,8 @@ import { CopyButton } from '../CopyButton'
 
 const InputRow = styled.div<{ selected: boolean }>`
   display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
+  flex-flow: column nowrap;
+  align-items: start;
   justify-content: flex-end;
   padding: ${({ selected }) => (selected ? '0.75rem 0.5rem 0.75rem 1rem' : '0.75rem 0.75rem 0.75rem 1rem')};
 `
@@ -26,6 +26,8 @@ const CurrencySelectButton = styled(Button).attrs({ variant: 'text', scale: 'sm'
 const LabelRow = styled.div`
   display: flex;
   flex-flow: row nowrap;
+  justify-contents: space-between;
+  width: 100%;
   align-items: center;
   color: ${({ theme }) => theme.colors.text};
   font-size: 0.75rem;
@@ -41,9 +43,13 @@ const InputPanel = styled.div`
   z-index: 1;
 `
 const Container = styled.div`
-  border-radius: 16px;
+  overflow: hidden;
+  border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.input};
   box-shadow: ${({ theme }) => theme.shadows.inset};
+`
+const UseMaxButton = styled.button`
+  cursor: pointer;
 `
 interface CurrencyInputPanelProps {
   value: string
@@ -95,92 +101,92 @@ export default function CurrencyInputPanel({
   )
   return (
     <Box position="relative" id={id}>
-      <Flex mb="6px" alignItems="center" justifyContent="space-between">
-        <Flex>
-          <CurrencySelectButton
-            className="open-currency-select-button"
-            selected={!!currency}
-            onClick={() => {
-              if (!disableCurrencySelect) {
-                onPresentCurrencyModal()
-              }
-            }}
-          >
-            <Flex alignItems="center" justifyContent="space-between">
-              {pair ? (
-                <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={16} margin />
-              ) : currency ? (
-                <CurrencyLogo currency={currency} size="24px" style={{ marginRight: '8px' }} />
-              ) : null}
-              {pair ? (
-                <Text id="pair" bold>
-                  {pair?.token0.symbol}:{pair?.token1.symbol}
-                </Text>
-              ) : (
-                <Text id="pair" bold>
-                  {(currency && currency.symbol && currency.symbol.length > 20
-                    ? `${currency.symbol.slice(0, 4)}...${currency.symbol.slice(
-                        currency.symbol.length - 5,
-                        currency.symbol.length,
-                      )}`
-                    : currency?.symbol) || t('Select a currency')}
-                </Text>
-              )}
-              {!disableCurrencySelect && <ChevronDownIcon />}
-            </Flex>
-          </CurrencySelectButton>
-          {token && tokenAddress ? (
-            <Flex style={{ gap: '4px' }} alignItems="center">
-              <CopyButton
-                width="16px"
-                buttonColor="textSubtle"
-                text={tokenAddress}
-                tooltipMessage={t('Token address copied')}
-                tooltipTop={-20}
-                tooltipRight={40}
-                tooltipFontSize={12}
-              />
-              {library?.provider?.isMetaMask && (
-                <MetamaskIcon
-                  style={{ cursor: 'pointer' }}
-                  width="16px"
-                  onClick={() =>
-                    registerToken(
-                      tokenAddress,
-                      token.symbol,
-                      token.decimals,
-                      token instanceof WrappedTokenInfo ? token.logoURI : undefined,
-                    )
-                  }
-                />
-              )}
-            </Flex>
-          ) : null}
-        </Flex>
-        {account && (
-          <Text onClick={onMax} color="textSubtle" fontSize="14px" style={{ display: 'inline', cursor: 'pointer' }}>
-            {!hideBalance && !!currency
-              ? t('Balance: %balance%', { balance: selectedCurrencyBalance?.toSignificant(6) ?? t('Loading') })
-              : ' -'}
-          </Text>
-        )}
-      </Flex>
+      <Flex mb="6px" alignItems="center" justifyContent="space-between"></Flex>
       <InputPanel>
-        <Container as="label">
-          <LabelRow>
-            <NumericalInput
-              className="token-amount-input"
-              value={value}
-              onUserInput={(val) => {
-                onUserInput(val)
-              }}
-            />
-          </LabelRow>
+        <Container>
+          {account && currency && showMaxButton && label !== 'To' && (
+            <UseMaxButton style={{ marginLeft: 'auto', display: 'block' }} onClick={onMax}>
+              {t('Use Max')}
+            </UseMaxButton>
+          )}
+          <Flex>
+            <LabelRow>
+              <NumericalInput
+                align="left"
+                className="token-amount-input"
+                value={value}
+                onUserInput={(val) => {
+                  onUserInput(val)
+                }}
+              />
+              <CurrencySelectButton
+                className="open-currency-select-button"
+                selected={!!currency}
+                onClick={() => {
+                  if (!disableCurrencySelect) {
+                    onPresentCurrencyModal()
+                  }
+                }}
+              >
+                <Flex alignItems="center" justifyContent="space-between">
+                  {pair ? (
+                    <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={16} margin />
+                  ) : currency ? (
+                    <CurrencyLogo currency={currency} size="24px" style={{ marginRight: '8px' }} />
+                  ) : null}
+                  {pair ? (
+                    <Text id="pair" bold>
+                      {pair?.token0.symbol}:{pair?.token1.symbol}
+                    </Text>
+                  ) : (
+                    <Text id="pair" bold>
+                      {(currency && currency.symbol && currency.symbol.length > 20
+                        ? `${currency.symbol.slice(0, 4)}...${currency.symbol.slice(
+                            currency.symbol.length - 5,
+                            currency.symbol.length,
+                          )}`
+                        : currency?.symbol) || t('Select a currency')}
+                    </Text>
+                  )}
+                  {!disableCurrencySelect && <ChevronDownIcon />}
+                </Flex>
+              </CurrencySelectButton>
+              {token && tokenAddress ? (
+                <Flex style={{ gap: '4px' }} alignItems="center">
+                  <CopyButton
+                    width="16px"
+                    buttonColor="textSubtle"
+                    text={tokenAddress}
+                    tooltipMessage={t('Token address copied')}
+                    tooltipTop={-20}
+                    tooltipRight={40}
+                    tooltipFontSize={12}
+                  />
+                  {library?.provider?.isMetaMask && (
+                    <MetamaskIcon
+                      style={{ cursor: 'pointer' }}
+                      width="16px"
+                      onClick={() =>
+                        registerToken(
+                          tokenAddress,
+                          token.symbol,
+                          token.decimals,
+                          token instanceof WrappedTokenInfo ? token.logoURI : undefined,
+                        )
+                      }
+                    />
+                  )}
+                </Flex>
+              ) : null}
+            </LabelRow>
+          </Flex>
           <InputRow selected={disableCurrencySelect}>
-            {account && currency && showMaxButton && label !== 'To' && (
-              <Button onClick={onMax} scale="xs" variant="secondary">
-                {t('Max').toLocaleUpperCase(locale)}
-              </Button>
+            {account && (
+              <Text onClick={onMax} color="textSubtle" fontSize="14px" style={{ display: 'inline', cursor: 'pointer' }}>
+                {!hideBalance && !!currency
+                  ? t('Balance: %balance%', { balance: selectedCurrencyBalance?.toSignificant(6) ?? t('Loading') })
+                  : ' -'}
+              </Text>
             )}
           </InputRow>
         </Container>

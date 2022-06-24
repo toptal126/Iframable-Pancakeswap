@@ -90,7 +90,7 @@ export default function CurrencySearchModal({
   }
 
   return (
-    <StyledModalContainer minWidth="320px">
+    <StyledModalContainer minWidth="100%">
       <ModalHeader>
         <ModalTitle>
           {config[modalView].onBack && <ModalBackButton onBack={config[modalView].onBack} />}
@@ -124,12 +124,7 @@ export default function CurrencySearchModal({
         )}
         {modalView === CurrencyModalView.search && (
           <Footer>
-            <Button
-              scale="sm"
-              variant="text"
-              onClick={() => setModalView(CurrencyModalView.manage)}
-              className="list-token-manage-button"
-            >
+            <Button onClick={() => setModalView(CurrencyModalView.manage)} className="list-token-manage-button">
               {t('Manage Tokens')}
             </Button>
           </Footer>

@@ -56,9 +56,7 @@ import {
   useExchangeChartManager,
 } from '../../state/user/hooks'
 import CircleLoader from '../../components/Loader/CircleLoader'
-import Page from '../Page'
 import SwapWarningModal from './components/SwapWarningModal'
-import PriceChartContainer from './components/Chart/PriceChartContainer'
 import { StyledInputCurrencyWrapper } from './styles'
 import CurrencyInputHeader from './components/CurrencyInputHeader'
 import ImportTokenWarningModal from '../../components/ImportTokenWarningModal'
@@ -70,11 +68,18 @@ const Label = styled(Text)`
 `
 
 const SwitchIconButton = styled(IconButton)`
+  width: 40px;
+  height: 40px;
   box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.1);
+  .icon-down {
+    display: block;
+    fill: white;
+  }
   .icon-up-down {
     display: none;
   }
   &:hover {
+    opacity: 1 !important;
     background-color: ${({ theme }) => theme.colors.primary};
     .icon-down {
       display: none;
@@ -383,21 +388,22 @@ export default function Swap() {
                 id="swap-currency-input"
               />
 
-              <AutoColumn justify="space-between">
+              <AutoColumn style={{ marginTop: '-20px', marginBottom: '-20px', zIndex: 10 }} justify="space-between">
                 <AutoRow justify={isExpertMode ? 'space-between' : 'center'} style={{ padding: '0 1rem' }}>
                   <SwitchIconButton
-                    variant="light"
-                    scale="sm"
+                    variant="primary"
                     onClick={() => {
                       setApprovalSubmitted(false) // reset 2 step UI for approvals
                       onSwitchTokens()
                     }}
                   >
                     <ArrowDownIcon
+                      width={24}
                       className="icon-down"
                       color={currencies[Field.INPUT] && currencies[Field.OUTPUT] ? 'primary' : 'text'}
                     />
                     <ArrowUpDownIcon
+                      width={24}
                       className="icon-up-down"
                       color={currencies[Field.INPUT] && currencies[Field.OUTPUT] ? 'primary' : 'text'}
                     />
@@ -542,6 +548,7 @@ export default function Swap() {
                   }}
                   id="swap-button"
                   width="100%"
+                  style={{ borderRadius: '100px' }}
                   disabled={!isValid || (priceImpactSeverity > 3 && !isExpertMode) || !!swapCallbackError}
                 >
                   {swapInputError ||

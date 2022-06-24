@@ -46,7 +46,7 @@ const CurrencyInputHeader: React.FC<Props> = ({ title, hasAmount, onRefreshPrice
         </Flex>
         <Flex>
           <NotificationDot show={expertMode}>
-            <GlobalSettings color="textSubtle" mr="0" />
+            <GlobalSettings color="#2C2B4A" mr="0" />
           </NotificationDot>
         </Flex>
       </Flex>

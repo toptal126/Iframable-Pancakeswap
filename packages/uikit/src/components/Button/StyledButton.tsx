@@ -47,13 +47,13 @@ const StyledButton = styled.button<BaseButtonProps>`
   position: relative;
   align-items: center;
   border: 0;
-  border-radius: 16px;
+  border-radius: 1000px;
   box-shadow: 0px -1px 0px 0px rgba(14, 14, 44, 0.4) inset;
   cursor: pointer;
   display: inline-flex;
   font-family: inherit;
   font-size: 16px;
-  font-weight: 600;
+  // font-weight: 600;
   justify-content: center;
   letter-spacing: 0.03em;
   line-height: 1;
