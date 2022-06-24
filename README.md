@@ -1,6 +1,8 @@
-# 🥞 Pancake Frontend
+# 🥞 Iframable Pancake Swap Page
 
-This project contains the main features of the pancake application.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0f4c25a2-111b-4db9-b3bf-0480cba329a8/deploy-status)](https://app.netlify.com/sites/titanx-pancakeswap/deploys)
+
+This project uses the swap features of the pancake application.
 
 If you want to contribute, please refer to the [contributing guidelines](./CONTRIBUTING.md) of this project.
 
