@@ -12,7 +12,7 @@ import {
   MoreIcon,
 } from '@pancakeswap/uikit'
 import { ContextApi } from 'contexts/Localization/types'
-import { nftsBaseUrl } from 'views/Nft/market/constants'
+
 import { perpLangMap } from 'utils/getPerpetualLanguageCode'
 import { DropdownMenuItems } from '@pancakeswap/uikit/src/components/DropdownMenu/types'
 
@@ -82,26 +82,6 @@ const config: (t: ContextApi['t'], languageCode?: string) => ConfigMenuItemsType
       {
         label: t('Lottery'),
         href: '/lottery',
-      },
-    ],
-  },
-  {
-    label: t('NFT'),
-    href: `${nftsBaseUrl}`,
-    icon: NftIcon,
-    fillIcon: NftFillIcon,
-    items: [
-      {
-        label: t('Overview'),
-        href: `${nftsBaseUrl}`,
-      },
-      {
-        label: t('Collections'),
-        href: `${nftsBaseUrl}/collections`,
-      },
-      {
-        label: t('Activity'),
-        href: `${nftsBaseUrl}/activity`,
       },
     ],
   },
