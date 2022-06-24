@@ -29,22 +29,16 @@ function ImportToken({ tokens, handleCurrencySelect }: ImportProps) {
 
   return (
     <AutoColumn gap="lg">
-      <Message variant="warning">
-        <Text>
-          {t(
-            'Anyone can create a BEP20 token on BSC with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.',
-          )}
-          <br />
-          <br />
-          {t('If you purchase an arbitrary token, you may be unable to sell it back.')}
-        </Text>
-      </Message>
-
       {tokens.map((token) => {
         const list = chainId && inactiveTokenList?.[chainId]?.[token.address]?.list
         const address = token.address ? `${truncateHash(token.address)}` : null
         return (
-          <Grid key={token.address} gridTemplateRows="1fr 1fr 1fr" gridGap="4px">
+          <Grid
+            style={{ border: '1px solid #A19FAB', borderRadius: '16px', padding: '16px' }}
+            key={token.address}
+            gridTemplateRows="1fr 1fr 1fr"
+            gridGap="4px"
+          >
             {list !== undefined ? (
               <Tag
                 variant="success"
@@ -55,27 +49,34 @@ function ImportToken({ tokens, handleCurrencySelect }: ImportProps) {
                 {t('via')} {list.name}
               </Tag>
             ) : (
-              <Tag variant="failure" outline scale="sm" startIcon={<ErrorIcon color="failure" />}>
-                {t('Unknown Source')}
-              </Tag>
+              <></>
             )}
             <Flex alignItems="center">
               <Text mr="8px">{token.name}</Text>
               <Text>({token.symbol})</Text>
             </Flex>
             {chainId && (
-              <Flex justifyContent="space-between" width="100%">
-                <Text mr="4px">{address}</Text>
+              <>
+                <Text mr="4px" fontSize={14}>
+                  {token.address}
+                </Text>
                 <Link href={getBscScanLink(token.address, 'address', chainId)} external>
                   ({t('View on BscScan')})
                 </Link>
-              </Flex>
+              </>
             )}
           </Grid>
         )
       })}
-
-      <Flex justifyContent="space-between" alignItems="center">
+      <Message variant="warning">
+        <Text color="#F99D15" fontSize={24} fontWeight="bold" textAlign="center">
+          {t('Trade at your own risk!')}
+        </Text>
+        <Text color="#A19FAB" textAlign="center">
+          {t(
+            'Anyone can create a BEP20 token on BSC with any name, including creating fake versions of existing tokens and tokens that claim to represent projects. If you purchase an arbitrary token, you may be unable to sell it back.',
+          )}
+        </Text>
         <Flex alignItems="center" onClick={() => setConfirmed(!confirmed)}>
           <Checkbox
             scale="sm"
@@ -88,8 +89,12 @@ function ImportToken({ tokens, handleCurrencySelect }: ImportProps) {
             {t('I understand')}
           </Text>
         </Flex>
+      </Message>
+
+      <Flex justifyContent="space-between" alignItems="center">
         <Button
-          variant="danger"
+          width="100%"
+          variant="primary"
           disabled={!confirmed}
           onClick={() => {
             tokens.forEach((token) => addToken(token))

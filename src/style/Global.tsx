@@ -12,6 +12,17 @@ const GlobalStyle = createGlobalStyle`
     src: url(${InterUrl}) format('truetype');
     font-display: auto;
   }
+
+  @keyframes fade-spinner {
+    0% {
+      animation-timing-function: cubic-bezier(0.2057,0.573,0.3723,0.9184);
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
   * {
     font-family: 'Inter', sans-serif;
   }

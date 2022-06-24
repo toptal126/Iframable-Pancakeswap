@@ -16,7 +16,9 @@ const Icons = {
 };
 
 const MessageContainer = styled.div<MessageProps>`
-  background-color: gray;
+  background-color: transparent !important;
+  border-color: #a19fab !important;
+
   padding: 16px;
   border-radius: 16px;
   border: solid 1px;
@@ -27,8 +29,10 @@ const MessageContainer = styled.div<MessageProps>`
   })}
 `;
 
-const Flex = styled.div`
+const FlexCol = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const colors = {
@@ -52,11 +56,11 @@ const Message: React.FC<MessageProps> = ({ children, variant, icon, action, acti
   return (
     <MessageContext.Provider value={{ variant }}>
       <MessageContainer variant={variant} {...props}>
-        <Flex>
-          <Box mr="12px">{icon ?? <Icon color={variants[variant].borderColor} width="24px" />}</Box>
+        <FlexCol>
+          <Box mr="12px">{icon ?? <Icon color={variants[variant].borderColor} width="120px" />}</Box>
           {children}
           {actionInline && action}
-        </Flex>
+        </FlexCol>
         {!actionInline && action}
       </MessageContainer>
     </MessageContext.Provider>
