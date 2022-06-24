@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { Flex, Skeleton, UserMenuItem } from '@pancakeswap/uikit'
-import { useWeb3React } from '@web3-react/core'
 import { useTranslation } from 'contexts/Localization'
 
 import { useRouter } from 'next/router'
@@ -19,7 +18,6 @@ const Dot = styled.div`
 `
 
 const ProfileUserMenuItem: React.FC<ProfileUserMenuItemProps> = ({ isLoading, hasProfile, disabled }) => {
-  const { account } = useWeb3React()
   const router = useRouter()
   const { t } = useTranslation()
 

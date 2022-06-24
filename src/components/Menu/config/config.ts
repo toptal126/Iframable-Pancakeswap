@@ -7,8 +7,6 @@ import {
   EarnIcon,
   TrophyIcon,
   TrophyFillIcon,
-  NftIcon,
-  NftFillIcon,
   MoreIcon,
 } from '@pancakeswap/uikit'
 import { ContextApi } from 'contexts/Localization/types'
