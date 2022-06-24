@@ -15,6 +15,7 @@
     "lodash/import-scope": [2, "method"],
     "@next/next/no-img-element": 0,
     "no-sparse-arrays": 0,
+    "react/self-closing-comp": "off",
     "react-hooks/exhaustive-deps": [
       "warn",
       {
