@@ -1,6 +1,6 @@
 # 🥞 Iframable Pancake Swap Page
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/0f4c25a2-111b-4db9-b3bf-0480cba329a8/deploy-status)](https://titanx-pancakeswap.netlify.app/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0f4c25a2-111b-4db9-b3bf-0480cba329a8/deploy-status)](https://iframe-pancakeswap.netlify.app/)
 
 This project uses the swap features of the pancake application.
 
